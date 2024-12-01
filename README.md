@@ -1,27 +1,116 @@
-# React + TypeScript + Vite
+# Game Catalog Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="left">
+   <img src="https://img.shields.io/badge/STATUS-UNDER%20DEVELOPMENT-green">
+   </p>
 
-Currently, two official plugins are available:
+This project is a React-based website that fetches and displays a catalog of available in the store. The data is fetched from a third-party API.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- Fetch game data from an external API
+- Display a list of available games for sale
+- Responsive and user-friendly interface
 
-## Expanding the ESLint configuration
+## Status
+**Ongoing Project:** This project is currently under development. Some features and functionalities may not be fully implemented yet.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Requirements
+- Node.js
+- npm or yarn
+- Internet connection (to fetch game data)
 
-- Configure the top-level `parserOptions` property like this:
+## Installation
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/yourusername/GameCatalogWebsite.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd GameCatalogWebsite
+   ```
+3. Install the dependencies:
+   ```sh
+   npm install
+   ```
+   or
+   ```sh
+   yarn install
+   ```
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+## Usage
+1. Start the development server:
+   ```sh
+   npm start
+   ```
+   or
+   ```sh
+   yarn start
+   ```
+2. Open your browser and go to `http://localhost:3000` to see the game catalog.
+
+## Project Structure
+- `src/components/ListGroup`: Contains the components for displaying the list of games.
+- `src/App.js`: The main component that handles fetching and displaying game data.
+- `src/App.css`: Styles for the application.
+
+## Code Overview
+The main component (`App.js`) fetches data from an API and displays the list of games. Here's a brief overview of the code:
+
+```javascript
+import { useEffect, useState } from "react";
+import axios from "axios";
+import "./App.css";
+
+function App() {
+  interface Game {
+    id: number;
+    name: string;
+    price: number;
+  }
+
+  const [games, setGames] = useState<Game[]>([]);
+
+  useEffect(() => {
+    axios
+      .get<Game[]>("https://exampleapi.com/games")
+      .then((res) => setGames(res.data));
+  }, []);
+
+  return (
+    <>
+      <ul>
+        {games.map((game) => (
+          <li key={game.id}>{game.name} - ${game.price}</li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+export default App;
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Third-Party Libraries
+- [axios](https://github.com/axios/axios): For making HTTP requests.
+- [React](https://reactjs.org/): For building the user interface.
+
+## API
+The application uses a third-party API to fetch the list of games. You can configure the API endpoint in the `useEffect` hook in `App.js`.
+
+```javascript
+useEffect(() => {
+  axios
+    .get<Game[]>("https://exampleapi.com/games")
+    .then((res) => setGames(res.data));
+}, []);
+```
+
+## Styling
+The application uses basic CSS for styling, which is included in the `App.css` file.
+
+
+## Contact
+If you have any questions or suggestions, feel free to reach out at vilcheariel1@gmail.com
+
+
+Feel free to tweak any sections as the project evolves. If you need further assistance or want to brainstorm new features, I'm here to help!
