@@ -111,6 +111,3 @@ The application uses basic CSS for styling, which is included in the `App.css` f
 
 ## Contact
 If you have any questions or suggestions, feel free to reach out at vilcheariel1@gmail.com
-
-
-Feel free to tweak any sections as the project evolves. If you need further assistance or want to brainstorm new features, I'm here to help!
